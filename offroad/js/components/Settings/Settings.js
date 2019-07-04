@@ -169,25 +169,25 @@ class Settings extends Component {
         const settingsMenuItems = [
             {
                 icon: Icons.user,
-                title: 'Account',
-                context: isPaired ? 'Paired' : 'Unpaired',
+                title: '账户',
+                context: isPaired ? '已配对' : '未配对',
                 route: SettingsRoutes.ACCOUNT,
             },
             {
                 icon: Icons.eon,
-                title: 'Device',
-                context: `${ parseInt(freeSpace * 100) + '%' } Free`,
+                title: '设备存储',
+                context: `剩余 ${ parseInt(freeSpace * 100) + '%'}`,
                 route: SettingsRoutes.DEVICE,
             },
             {
                 icon: Icons.network,
-                title: 'Network',
+                title: '网络',
                 context: connectivity,
                 route: SettingsRoutes.NETWORK,
             },
             {
                 icon: Icons.developer,
-                title: 'Developer',
+                title: '开发人员设置',
                 context: `${ software } v${ version.split('-')[0] }`,
                 route: SettingsRoutes.DEVELOPER,
             },
@@ -247,7 +247,7 @@ class Settings extends Component {
                         color='ghost'
                         size='small'
                         onPress={ () => this.handlePressedBack() }>
-                        {'<  Settings'}
+                        {'<  设置'}
                     </X.Button>
                 </View>
                 <ScrollView
@@ -259,37 +259,37 @@ class Settings extends Component {
                     <X.Table color='darkBlue'>
                         <X.TableCell
                             type='switch'
-                            title='Enable Driver Monitoring'
+                            title='驾驶员监控'
                             value={ !!parseInt(isDriverMonitoringEnabled) }
                             iconSource={ Icons.monitoring }
-                            description='Driver Monitoring detects driver awareness with 3D facial reconstruction and pose estimation. It is used to warn the driver when they appear distracted while openpilot is engaged. This feature is still in beta, so Driver Monitoring is unavailable when the facial tracking is too inaccurate (e.g. at night). The availability is indicated by the face icon at the bottom-left corner of your EON.'
+                            description='{\n\"}驾驶员监控通过三维人脸重建和姿态估计来检测驾驶员的感知。当openpilot被占用时，当驾驶员出现分心时，它会发出警告。这一功能仍处于测试阶段，所以当面部跟踪太不准确时(比如在晚上)，司机监控是不可用的。可用性由左下角的face图标指示。'
                             isExpanded={ expandedCell == 'driver_monitoring' }
                             handleExpanded={ () => this.handleExpanded('driver_monitoring') }
                             handleChanged={ this.props.setDriverMonitoringEnabled } />
                         <X.TableCell
                             type='switch'
-                            title='Record and Upload Driver Camera'
+                            title='记录并上传摄像头信息'
                             value={ !!parseInt(recordFront) }
                             iconSource={ Icons.network }
-                            description='Upload data from the driver facing camera and help improve the Driver Monitoring algorithm.'
+                            description='上传面向摄像头的司机数据，帮助改进司机监控算法。'
                             isExpanded={ expandedCell == 'record_front' }
                             handleExpanded={ () => this.handleExpanded('record_front') }
                             handleChanged={ this.props.setRecordFront } />
                         <X.TableCell
                             type='switch'
-                            title='Enable Forward Collision Warning'
+                            title='碰撞警告'
                             value={ !!parseInt(isFcwEnabled) }
                             iconSource={ Icons.warning }
-                            description='Use visual and acoustic warnings when risk of forward collision is detected.'
+                            description='当发现前方有碰撞危险时，使用视觉和听觉警告。'
                             isExpanded={ expandedCell == 'fcw' }
                             handleExpanded={ () => this.handleExpanded('fcw') }
                             handleChanged={ this.props.setFcwEnabled } />
                         <X.TableCell
                             type='switch'
-                            title='Use Metric System'
+                            title='使用公里制'
                             value={ !!parseInt(isMetric) }
                             iconSource={ Icons.metric }
-                            description='Display speed in km/h instead of mp/h and temperature in °C instead of °F.'
+                            description='显示速度用km/h代替mp/h，温度用°C代替°F。'
                             isExpanded={ expandedCell == 'metric' }
                             handleExpanded={ () => this.handleExpanded('metric') }
                             handleChanged={ this.props.setMetric } />
@@ -346,7 +346,7 @@ class Settings extends Component {
                         <X.Button
                             color='settingsDefault'
                             onPress={ () => this.props.openTrainingGuide() }>
-                            Review Training Guide
+                            回顾培训指南{/*Review Training Guide*/}
                         </X.Button>
                     </X.Table>
                     <X.Table color='darkBlue'>
@@ -354,14 +354,14 @@ class Settings extends Component {
                             size='small'
                             color='settingsDefault'
                             onPress={ () => this.props.reboot() }>
-                            Reboot
+                            重启
                         </X.Button>
                         <X.Line color='transparent' size='tiny' spacing='mini' />
                         <X.Button
                             size='small'
                             color='settingsDefault'
                             onPress={ () => this.props.shutdown() }>
-                            Power Off
+                            关机
                         </X.Button>
                     </X.Table>
                 </ScrollView>
@@ -379,7 +379,7 @@ class Settings extends Component {
                         color='ghost'
                         size='small'
                         onPress={ () => this.handlePressedBack() }>
-                        {'<  Account Settings'}
+                        {'<  账户设置'}
                     </X.Button>
                 </View>
                 <ScrollView
@@ -388,7 +388,7 @@ class Settings extends Component {
                     <View>
                         <X.Table>
                             <X.TableCell
-                                title='Device Paired'
+                                title='设备配对'
                                 value={ isPaired ? 'Yes' : 'No' } />
                         </X.Table>
                     </View>
@@ -420,7 +420,7 @@ class Settings extends Component {
                         color='ghost'
                         size='small'
                         onPress={ () => this.handlePressedBack() }>
-                        {'<  Device Settings'}
+                        {'<  设备设置'}
                     </X.Button>
                 </View>
                 <ScrollView
@@ -429,9 +429,9 @@ class Settings extends Component {
                     <X.Table color='darkBlue'>
                         <X.TableCell
                             type='custom'
-                            title='Camera Calibration'
+                            title='摄像机标定'
                             iconSource={ Icons.calibration }
-                            description='The calibration algorithm is always active on the road facing camera. Resetting calibration is only advised when EON reports an invalid calibration alert or when EON is remounted in a different position.'
+                            description='标定算法在面对摄像机的道路上始终处于活跃状态。只有当报告了一个无效的校准警报，或者在不同的位置重新安装时，才会建议重置校准。'
                             isExpanded={ expandedCell == 'calibration' }
                             handleExpanded={ () => this.handleExpanded('calibration') }>
                             <X.Button
@@ -439,26 +439,26 @@ class Settings extends Component {
                                 color='settingsDefault'
                                 onPress={ this.handlePressedResetCalibration  }
                                 style={ { minWidth: '100%' } }>
-                                Reset
+                                重置
                             </X.Button>
                         </X.TableCell>
                     </X.Table>
                     <X.Table>
                         <X.TableCell
-                            title='Paired'
+                            title='配对'
                             value={ isPaired ? 'Yes' : 'No' } />
                         <X.TableCell
-                            title='Dongle ID'
+                            title='ID'
                             value={ dongleId } />
                         <X.TableCell
-                            title='Serial Number'
+                            title='序列号'
                             value={ serialNumber } />
                         <X.TableCell
-                            title='Free Storage'
+                            title='剩余存储空间'
                             value={ parseInt(freeSpace * 100) + '%' }
                              />
                         <X.TableCell
-                            title='Upload Speed'
+                            title='上传速度'
                             value={ txSpeedKbps + ' kbps' }
                              />
                     </X.Table>
@@ -467,7 +467,7 @@ class Settings extends Component {
                             color='settingsDefault'
                             size='small'
                             onPress={ () => ChffrPlus.openDateTimeSettings() }>
-                            Open Date and Time Settings
+                            日期和时间设置
                         </X.Button>
                     </X.Table>
                 </ScrollView>
@@ -489,7 +489,7 @@ class Settings extends Component {
                         color='ghost'
                         size='small'
                         onPress={ () => this.handlePressedBack() }>
-                        {'<  Network Settings'}
+                        {'<  网络设置'}
                     </X.Button>
                 </View>
                 <ScrollView
@@ -499,7 +499,7 @@ class Settings extends Component {
                     <X.Table color='darkBlue'>
                         <X.TableCell
                             type='switch'
-                            title='Enable Upload Over Cellular'
+                            title='手机上传'
                             value={ !!parseInt(isCellularUploadEnabled) }
                             iconSource={ Icons.network }
                             description='Upload driving data over cellular connection if a sim card is used and no wifi network is available. If you have a limited data plan, you might incur in surcharges.'
@@ -512,14 +512,21 @@ class Settings extends Component {
                             size='small'
                             color='settingsDefault'
                             onPress={ () => ChffrPlus.openWifiSettings() }>
-                            Open WiFi Settings
+                            WiFi设置
+                        </X.Button>
+                        <X.Line color='transparent' size='tiny' spacing='mini' />
+                        <X.Button
+                            size='small'
+                            color='settingsDefault'
+                            onPress={ () => ChffrPlus.openBluetoothSettings() }>
+                            蓝牙设置
                         </X.Button>
                         <X.Line color='transparent' size='tiny' spacing='mini' />
                         <X.Button
                             size='small'
                             color='settingsDefault'
                             onPress={ () => ChffrPlus.openTetheringSettings() }>
-                            Open Tethering Settings
+                            共享设置
                         </X.Button>
                     </X.Table>
                 </ScrollView>
@@ -546,7 +553,7 @@ class Settings extends Component {
                         color='ghost'
                         size='small'
                         onPress={ () => this.handlePressedBack() }>
-                        {'<  Developer Settings'}
+                        {'<  开发人员设置'}
                     </X.Button>
                 </View>
                 <ScrollView
@@ -567,7 +574,7 @@ class Settings extends Component {
                     <X.Table color='darkBlue'>
                         <X.TableCell
                             type='switch'
-                            title='Enable SSH'
+                            title='SSH'
                             value={ isSshEnabled }
                             iconSource={ Icons.developer }
                             description='Allow devices to connect to your EON using Secure Shell (SSH).'
@@ -639,21 +646,21 @@ const mapDispatchToProps = dispatch => ({
         }));
     },
     reboot: () => {
-        Alert.alert('Reboot', 'Are you sure you want to reboot?', [
-            { text: 'Cancel', onPress: () => {}, style: 'cancel' },
-            { text: 'Reboot', onPress: () => ChffrPlus.reboot() },
+        Alert.alert('重启', '确认重启？', [
+            { text: '取消', onPress: () => {}, style: 'cancel' },
+            { text: '重启', onPress: () => ChffrPlus.reboot() },
         ]);
     },
     shutdown: () => {
-        Alert.alert('Power Off', 'Are you sure you want to shutdown?', [
-            { text: 'Cancel', onPress: () => {}, style: 'cancel' },
-            { text: 'Shutdown', onPress: () => ChffrPlus.shutdown() },
+        Alert.alert('关机', '确认关机？', [
+            { text: '取消', onPress: () => {}, style: 'cancel' },
+            { text: '关机', onPress: () => ChffrPlus.shutdown() },
         ]);
     },
     uninstall: () => {
-        Alert.alert('Uninstall', 'Are you sure you want to uninstall?', [
-            { text: 'Cancel', onPress: () => {}, style: 'cancel' },
-            { text: 'Uninstall', onPress: () => ChffrPlus.writeParam(Params.KEY_DO_UNINSTALL, "1") },
+        Alert.alert('卸载', '确认卸载？', [
+            { text: '取消', onPress: () => {}, style: 'cancel' },
+            { text: '卸载', onPress: () => ChffrPlus.writeParam(Params.KEY_DO_UNINSTALL, "1") },
         ]);
     },
     openTrainingGuide: () => {
